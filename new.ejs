@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create new post</title>
+     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="/style3.css" />
+</head>
+<body>
+    <div class="create-container">
+        <div class="create-card">
+            <h2>Create new Post</h2>
+    <form method="POST" action="/post">
+        <label for="username">Username</label>
+        <input id="username" name="username" placeholder="Enter username" required>
+        <br/><br/>
+        <label for="content">Post Content</label>
+        <textarea id="content" name="content" placeholder="Write your post..." required></textarea>
+          <div class="actions">
+          <button type="submit" class="btn submit-btn">🚀 Submit Post</button>
+          <a href="/post" class="btn cancel-btn">✖ Cancel</a>
+        </div>
+    </form>
+    </div>
+    </div>
+</body>
+</html>

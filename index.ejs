@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css" />
+    <style>
+      .modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 24px;
+  border-radius: 14px;
+  width: 90%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.modal-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+.author-footer {
+  margin-top: 60px;
+  padding: 30px 15px;
+  background: linear-gradient(135deg, #b8322a, #8e1e1e);
+  display: flex;
+  justify-content: center;
+}
+
+.author-card {
+  max-width: 600px;
+  text-align: center;
+  background: #ffffff;
+  padding: 25px 30px;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  font-family: "Segoe UI", sans-serif;
+}
+
+.author-card h3 {
+  margin-bottom: 10px;
+  font-size: 22px;
+  color: #333;
+}
+
+.heart {
+  color: #e63946;
+  font-size: 22px;
+}
+
+.author-card p {
+  font-size: 15px;
+  color: #555;
+  margin: 6px 0;
+}
+
+.author-desc {
+  font-size: 14px;
+  color: #666;
+  margin-top: 8px;
+}
+
+.copyright {
+  display: block;
+  margin-top: 15px;
+  font-size: 13px;
+  color: #888;
+}
+@media (max-width: 768px) {
+  .post-card {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .avatar {
+    width: 45px;
+    height: 45px;
+  }
+
+  .post-actions {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .btn {
+    width: 48%;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .post-card {
+    padding: 12px;
+  }
+
+  .user {
+    font-size: 14px;
+  }
+
+  .content {
+    font-size: 13px;
+  }
+
+  .btn {
+    width: 100%;
+    margin-bottom: 8px;
+     padding: 10px 14px;
+  border-radius: 8px;
+  min-height: 44px; 
+  }
+}
+form {
+  max-width: 600px;
+  margin: auto;
+}
+
+input,
+textarea,
+button {
+  width: 100%;
+  font-size: 15px;
+}
+.btn:hover {
+  transform: translateY(-1px);
+  transition: 0.2s ease;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.empty {
+  text-align: center;
+  color: #888;
+  margin-top: 40px;
+}
+.btn:focus {
+  outline: 2px solid #b8322a;
+}
+
+
+    </style>
+</head>
+<body>
+    <h1>Quora post</h1>
+    <div class="container">
+      <% if (name.length === 0) { %>
+  <p class="empty">No posts yet. Create your first post ✨</p>
+<% } %>
+
+     <% for (let post of name) { %>
+      <div class="post-card">
+        <div class="post">
+           <img class="avatar" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+          
+           <div class="post-content">
+            <h3 class="user">@<%= post.username %></h3>
+            <p class="content"><%= post.content %></p>
+   <a class="details-link" href="http://localhost:8080/post/<%=post.id%>">➜ See in details</a>
+           </div>
+        </div>
+
+        <div class="post-actions">
+           <a class="btn btn-details" href="http://localhost:8080/post/<%=post.id%>">See in details</a>
+  <a class="btn btn-details" href="http://localhost:8080/post/<%= post.id %>/edit">✏ Edit</a>
+          <div id="deleteModal" class="modal">
+  <div class="modal-content">
+    <h3>Delete Post?</h3>
+    <p>This action cannot be undone.</p>
+
+    <div class="modal-actions">
+      <button id="cancelDelete" class="btn cancel-btn">Cancel</button>
+      <button id="confirmDelete" class="btn delete-btn">Delete</button>
+    </div>
+  </div>
+</div>
+   <form method="POST" action="/post/<%= post.id %>?_method=DELETE"
+      onsubmit="return openDeleteModal(this)">
+  <button type="submit" class="btn btn-delete"  aria-label="Delete post">🗑 Delete</button>
+</form>
+    </div>
+    </div>
+    <% } %>
+    
+    <div class="create-btn">
+     <button onclick="createPost()"><a href="http://localhost:8080/post/new">➕ Create new post
+</a></button>
+     </div>
+        </div>
+        <footer class="author-footer">
+  <div class="author-card">
+    <h3>Made with <span class="heart">❤</span></h3>
+    <p>
+      Crafted by <strong><h4>Arif Reja</h4></strong>A passionate Java & Web Developer.
+    </p>
+    <p class="author-desc">
+      Focused on building clean, scalable applications and continuously
+      improving problem-solving skills through DSA and real-world projects.
+    </p>
+    <span class="copyright">
+      © 2025 Arif Reja. All rights reserved.
+    </span>
+  </div>
+</footer>
+
+
+
+
+
+
+         <script>
+
+    function deletePost(btn) {
+      const post = btn.closest('.post-card');
+      post.style.transition = '0.3s';
+      post.style.opacity = '0';
+      setTimeout(() => post.remove(), 300);
+    }
+
+    function createPost() {
+      alert("Redirect to Create Post Page");
+    }
+   let activeForm;
+
+  function openDeleteModal(form) {
+    activeForm = form;
+    document.getElementById("deleteModal").style.display = "flex";
+    return false;
+  }
+
+  document.getElementById("confirmDelete").onclick = () => {
+    activeForm.submit();
+  };
+
+  document.getElementById("cancelDelete").onclick = () => {
+    document.getElementById("deleteModal").style.display = "none";
+  };
+
+</script>
+
+</body>
+</html>

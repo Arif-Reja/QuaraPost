@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post in details</title>
+     <link rel="stylesheet" href="/style1.css" />
+     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="details-container">
+        <div class="post-card">
+    <h2>Here is post in details</h2>
+    <p class="post-id">Post id:<%=post.id%></p>
+    <div class="post">
+        <div class="user-section">
+        <img class="avatar" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+        <h3 class="user">@<%=post.username%></h3>
+        </div>
+        <p class="content"><%=post.content%></p>
+    </div>
+    <div class="actions">
+         <a href="/post" class="btn back-btn">← Back</a>
+        <a href="/post/<%= post.id %>/edit" class="btn edit-btn">✏ Edit</a>
+      </div>
+    </div>
+    </div>
+</body>
+</html>

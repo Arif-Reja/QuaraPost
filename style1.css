@@ -1,0 +1,122 @@
+ 
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Inter", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #faf7f6, #f2e9e4);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .details-container {
+      width: 100%;
+      max-width: 650px;
+    }
+
+    .post-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+      animation: fadeUp 0.6s ease;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin-bottom: 12px;
+      color: #8b2f2f;
+    }
+
+    .post-id {
+      font-size: 13px;
+      color: #777;
+      margin-bottom: 20px;
+    }
+
+    .post {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .user-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+
+    .user {
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .content {
+      font-size: 17px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .actions {
+      margin-top: 25px;
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 10px 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      transition: 0.3s ease;
+    }
+
+    .back-btn {
+      background: #f6eee6;
+      color: #8b5a2b;
+    }
+
+    .back-btn:hover {
+      background: #efdfcf;
+    }
+
+    .edit-btn {
+      background: linear-gradient(135deg, #b43a2f, #8b2f2f);
+      color: #ffffff;
+    }
+
+    .edit-btn:hover {
+      opacity: 0.9;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 500px) {
+      .post-card {
+        padding: 22px;
+      }
+    }
+  
